@@ -1,6 +1,6 @@
 using System;
 
-namespace ToonVil_Card_Generator.CardGeneration
+namespace Magic_Villainous_Card_Generator.CardGeneration
 {
 	public static class AssetHelper
 	{

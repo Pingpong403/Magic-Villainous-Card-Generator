@@ -1,16 +1,16 @@
-using ToonVil_Card_Generator.CardGeneration;
-using static ToonVil_Card_Generator.CardGeneration.PrepareText;
-using static ToonVil_Card_Generator.CardGeneration.PrepareImage;
+﻿using Magic_Villainous_Card_Generator.CardGeneration;
+using static Magic_Villainous_Card_Generator.CardGeneration.PrepareText;
+using static Magic_Villainous_Card_Generator.CardGeneration.PrepareImage;
 using System.Drawing;
 using System.Reflection;
 
-namespace ToonVil_Card_Generator;
+namespace Magic_Villainous_Card_Generator;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("ToonVil Card Generator");
+        Console.WriteLine("Magic Villainous Card Generator");
 
         if (!MiscHelper.CheckStructure())
         {
@@ -87,6 +87,10 @@ class Program
                     // Skip cards that do not have all the necessary elements
                     if (title != "" && (ability != "" || activateAbility != "" || activateCost != "" || gainsAction != "") && type != "")
                     {
+						if (MiscHelper.Capitalize(deck.ToLower()) == "Spell" || MiscHelper.Capitalize(deck.ToLower()) == "Spellfate")
+						{
+							textColor = ColorTranslator.FromHtml("#" + ConfigHelper.GetConfigValue("color", "spellFontColor"));
+						}
                         DrawTitle(title, titleFont, textColor, titleAreaMaxWidth, titleAreaMaxHeight);
                         DrawAbility(ability, activateAbility, activateCost, gainsAction, abilityFont, textColor, abilityAreaMaxWidth, abilityAreaMaxHeight, keywordsAndColors);
                         DrawType(type, typeFont, textColor, typeAreaMaxWidth, typeAreaMaxHeight, keywordsAndColors);

@@ -4,11 +4,11 @@ abilityCenterX:720
 abilityTopY:1284
 typeCenterX:720
 typeCenterY:1986
-costCenterX:189
-costCenterY:195
+costCenterX:187
+costCenterY:200
 strengthCenterX:139
-strengthCenterY:1905
+strengthCenterY:1915
 topRightCenterX:1253
-topRightCenterY:195
+topRightCenterY:200
 bottomRightCenterX:1302
-bottomRightCenterY:1904
+bottomRightCenterY:1912

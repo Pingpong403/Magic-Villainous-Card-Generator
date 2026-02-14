@@ -6,6 +6,8 @@
 Ally
 Item
 Effect
-Plot
+Condition
+Ingredient
+Tarot
+Location
 Hero
-Tip|ffffff

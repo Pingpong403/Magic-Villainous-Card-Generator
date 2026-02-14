@@ -1,7 +1,11 @@
-allyColor:ff1919
-itemColor:193fff
-effectColor:19ff23
-plotColor:d3568d
-heroColor:eda64b
+allyColor:de0022
+itemColor:45afe6
+effectColor:7ac424
+conditionColor:d3568d
+ingredientColor:9e41ba
+tarotColor:57626b
+heroColor:e68c0a
+locationColor:bc9b61
 fontColor:d7b06c
+spellFontColor:c40baf
 ornamentColor:d7b06c

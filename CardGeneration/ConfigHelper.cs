@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ToonVil_Card_Generator.CardGeneration
+namespace Magic_Villainous_Card_Generator.CardGeneration
 {
 	public static class ConfigHelper
 	{
@@ -20,7 +20,7 @@ namespace ToonVil_Card_Generator.CardGeneration
                 throw new FileNotFoundException($"Config file not found: {path}");
             }
 
-			string line;
+			string? line;
 			try
 			{
 				// Pass the file path to the StreamReader constructor
@@ -70,7 +70,7 @@ namespace ToonVil_Card_Generator.CardGeneration
             }
 
 			Dictionary<string, string> pairs = [];
-			string line;
+			string? line;
 			try
 			{
 				// Pass the file path to the StreamReader constructor

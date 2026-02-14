@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ToonVil_Card_Generator.CardGeneration
+namespace Magic_Villainous_Card_Generator.CardGeneration
 {
 	public static class MiscHelper
 	{
@@ -28,13 +28,13 @@ namespace ToonVil_Card_Generator.CardGeneration
 			switch (infractions)
 			{
 				case 63:
-					Console.WriteLine("Executable is not in project root. Please relocate to ToonVil-Card-Generator folder.");
+					Console.WriteLine("Executable is not in project root. Please relocate to Magic-Villainous-Card-Generator folder.");
 					return false;
 				case int n when n < 63 && n >= 8:
-					Console.WriteLine("Missing one or more vital configuration folders. Please redownload or relocate missing folders to the ToonVil-Card-Generator folder.");
+					Console.WriteLine("Missing one or more vital configuration folders. Please redownload or relocate missing folders to the Magic-Villainous-Card-Generator folder.");
 					return false;
 				case 7:
-					Console.WriteLine("Missing Card Data folder. Please redownload or relocate the folder to the ToonVil-Card-Generator folder.");
+					Console.WriteLine("Missing Card Data folder. Please redownload or relocate the folder to the Magic-Villainous-Card-Generator folder.");
 					return false;
 				case int n when n < 7 && n >= 1:
 					Console.WriteLine("Missing one or more vital Card Data folders. Please ensure -TextFiles, -Layout, and -Images are placed in Card Data.");
@@ -61,7 +61,7 @@ namespace ToonVil_Card_Generator.CardGeneration
                 throw new FileNotFoundException($"Text file not found: {path}");
             }
 
-			string line;
+			string? line;
 			try
 			{
 				// Pass the file path to the StreamReader constructor
@@ -153,6 +153,41 @@ namespace ToonVil_Card_Generator.CardGeneration
 			return ext;
 		}
 
+		public static void FixTransparency(Bitmap b, Color correctC, Color bgC)
+		{
+			float totalDiff = Math.Abs(correctC.R - bgC.R) +
+							  Math.Abs(correctC.G - bgC.G) + 
+							  Math.Abs(correctC.B - bgC.B);
+			for (int x = 0; x < b.Width; x++)
+			{
+				for (int y = 0; y < b.Height; y++)
+				{
+					float currDiff = Math.Abs(b.GetPixel(x, y).R - bgC.R) +
+									 Math.Abs(b.GetPixel(x, y).G - bgC.G) + 
+									 Math.Abs(b.GetPixel(x, y).B - bgC.B);
+					int newA = (int)(currDiff / totalDiff * 255);
+					b.SetPixel(x, y, Color.FromArgb(newA, correctC));
+				}
+			}
+		}
+
+		/// <summary>
+		/// Changes the color of the given symbol.
+		/// </summary>
+		/// <param name="symbol">the symbol to change</param>
+		/// <param name="color">the color to change the symbol to</param>
+		public static void ColorSymbol(Bitmap symbol, Color color)
+		{
+			for (int x = 0; x < symbol.Width; x++)
+			{
+				for (int y = 0; y < symbol.Height; y++)
+				{
+					int alpha = symbol.GetPixel(x, y).A;
+					symbol.SetPixel(x, y, Color.FromArgb(alpha, color));
+				}
+			}
+		}
+
 		/// <summary>
 		/// Helper method to capitalize just the first letter in a string.
 		/// </summary>
@@ -176,7 +211,7 @@ namespace ToonVil_Card_Generator.CardGeneration
 		/// <returns>Whether or not given text is punctuation.</returns>
 		public static bool IsPunctuation(string text)
 		{
-			if (".?!,;:/-".Contains(text))
+			if (".?!,;:/-'".Contains(text))
 			{
 				return true;
 			}
